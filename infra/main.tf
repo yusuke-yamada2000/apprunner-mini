@@ -1,17 +1,3 @@
-terraform {
-  required_version = ">= 1.5.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "ap-northeast-1"
-}
-
 resource "aws_sns_topic" "alerts" {
   name = "apprunner-mini-alerts"
 }
@@ -37,4 +23,3 @@ resource "aws_cloudwatch_metric_alarm" "active_instances_zero" {
   alarm_actions = [aws_sns_topic.alerts.arn]
   ok_actions    = [aws_sns_topic.alerts.arn]
 }
-
