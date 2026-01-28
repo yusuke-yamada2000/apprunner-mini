@@ -1,0 +1,70 @@
+<mxfile host="65bd71144e">
+    <diagram id="apprunner-mini" name="AWS App Runner CI/CD + Monitoring">
+        <mxGraphModel dx="962" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="lane1" value="CI/CD Flow" style="swimlane;whiteSpace=wrap;html=1;rounded=0;fillColor=#F7F7F7;strokeColor=#BDBDBD;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="1020" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="github" value="GitHub&#xa;main branch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#64B5F6;" parent="lane1" vertex="1">
+                    <mxGeometry x="40" y="70" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="actions" value="GitHub Actions&#xa;CI/CD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#81C784;" parent="lane1" vertex="1">
+                    <mxGeometry x="240" y="70" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="ecr" value="Amazon ECR&#xa;Docker image" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FFB74D;" parent="lane1" vertex="1">
+                    <mxGeometry x="470" y="70" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="apprunner" value="AWS App Runner&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#BA68C8;" parent="lane1" vertex="1">
+                    <mxGeometry x="700" y="70" width="190" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="app" value="Sinatra App&#xa;/ , /health" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F7FA;strokeColor=#4DD0E1;" parent="lane1" vertex="1">
+                    <mxGeometry x="910" y="70" width="90" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane1" source="github" target="actions" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane1" source="actions" target="ecr" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane1" source="ecr" target="apprunner" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane1" source="apprunner" target="app" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane2" value="Monitoring / Alert Flow" style="swimlane;whiteSpace=wrap;html=1;rounded=0;fillColor=#F7F7F7;strokeColor=#BDBDBD;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="340" width="1020" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="metrics" value="CloudWatch Metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#FFF176;" parent="lane2" vertex="1">
+                    <mxGeometry x="180" y="80" width="190" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="alarm" value="CloudWatch Alarm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#FFF176;" parent="lane2" vertex="1">
+                    <mxGeometry x="415" y="80" width="190" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="sns" value="SNS Topic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#4DB6AC;" parent="lane2" vertex="1">
+                    <mxGeometry x="660" y="80" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="email" value="Email Notification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#F48FB1;" parent="lane2" vertex="1">
+                    <mxGeometry x="870" y="80" width="110" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane2" source="apprunner" target="metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane2" source="metrics" target="alarm" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane2" source="alarm" target="sns" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" parent="lane2" source="sns" target="email" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge9" value="Health check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;" parent="1" source="app" target="metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
